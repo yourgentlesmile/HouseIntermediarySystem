@@ -35,7 +35,7 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/LoginCheck", method = RequestMethod.POST)
 	public @ResponseBody User loginCheck(@RequestBody User user) {
-		logger.debug("username:{0},password:{1}",user.username,user.password);
+		logger.debug("username:{0},password:{1}",user.getUsername(),user.getPassword());
 		return user;
 	}
 	
