@@ -7,8 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CheckLoginController {
-//	@RequestMapping(value="/",method = RequestMethod.GET)
-//	public ModelAndView check() {
-//		return new ModelAndView("redirect:Login");
-//	}
+    @RequestMapping(value="/",method = RequestMethod.GET)
+    public ModelAndView check() {
+        return new ModelAndView("redirect:Login");
+    }
 }

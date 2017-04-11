@@ -18,25 +18,24 @@ import indi.group.his.model.User;
 @Controller
 public class LoginController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	public static String safecode="";
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/Login", method = RequestMethod.GET)
-	public String home(Locale locale) {
-		logger.debug("Index,jsp has been requested");
-		return "Index";
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    public static String safecode="";
+    /**
+     * Simply selects the home view to render by returning its name.
+     */
+    @RequestMapping(value = "/Login", method = RequestMethod.GET)
+    public String home(Locale locale) {
+        logger.debug("Index,jsp has been requested");
+        return "Index";
 	}
-	@RequestMapping(value = "/getsafecode", method = RequestMethod.GET)
-	public @ResponseBody String getSafeCode() {
-		logger.debug("getSafeCode hes been invoked");
-		return safecode;
-	}
-	@RequestMapping(value = "/LoginCheck", method = RequestMethod.POST)
-	public @ResponseBody User loginCheck(@RequestBody User user) {
-		logger.debug("username:{0},password:{1}",user.getUsername(),user.getPassword());
-		return user;
-	}
-	
+    @RequestMapping(value = "/getsafecode", method = RequestMethod.GET)
+    public @ResponseBody String getSafeCode() {
+        logger.debug("getSafeCode hes been invoked");
+        return safecode;
+    }
+    @RequestMapping(value = "/LoginCheck", method = RequestMethod.POST)
+    public @ResponseBody User loginCheck(@RequestBody User user) {
+    	logger.debug("username:{0},password:{1}",user.getUsername(),user.getPassword());
+    	return user;
+    }
 }
