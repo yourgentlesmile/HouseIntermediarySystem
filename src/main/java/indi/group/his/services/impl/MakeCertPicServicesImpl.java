@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
 
-
+/**
+ * Describle:
+ * This function generate valification code image with jsp
+ */
 public class MakeCertPicServicesImpl implements IMakeCertPicService{
     private static final Color Color = null;
     private char mapTable[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
