@@ -15,7 +15,6 @@ import java.util.Random;
  * This function generate valification code image with jsp
  */
 public class MakeCertPicServicesImpl implements IMakeCertPicService{
-    private static final Color Color = null;
     private char mapTable[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
             'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8',
@@ -33,13 +32,13 @@ public class MakeCertPicServicesImpl implements IMakeCertPicService{
         Graphics graphics = image.getGraphics();
         graphics.setColor(new Color(0xDCDCDC));
         graphics.fillRect(0, 0, width, height);
-        graphics.setColor(Color.black);
+        graphics.setColor(java.awt.Color.black);
         graphics.drawRect(0, 0, width - 1, height - 1);
         String strEnsure = "";
         for (int i = 1; i <= 4; i++) {
             strEnsure += mapTable[(int) (mapTable.length * Math.random())];
         }
-        graphics.setColor(Color.black);
+        graphics.setColor(java.awt.Color.black);
         graphics.setFont(new Font("Atlantic Inline", Font.PLAIN, 20));
         String str = strEnsure.substring(0, 1);
         graphics.drawString(str, 8, 17);
