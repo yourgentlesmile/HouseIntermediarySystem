@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indi.group.his.dao.IContractDao">
+  <resultMap id="BaseResultMap" type="indi.group.his.model.Contract">
+    <id column="contract_id" jdbcType="INTEGER" property="contractId" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="employee_name" jdbcType="VARCHAR" property="employeeName" />
+    <result column="signtime" jdbcType="TIMESTAMP" property="signtime" />
+    <result column="intention_gold" jdbcType="INTEGER" property="intentionGold" />
+    <result column="deal_gold" jdbcType="INTEGER" property="dealGold" />
+    <result column="houses_area" jdbcType="REAL" property="housesArea" />
+    <result column="houses_price" jdbcType="REAL" property="housesPrice" />
+    <result column="houses_name" jdbcType="VARCHAR" property="housesName" />
+    <result column="client_sex" jdbcType="BIT" property="clientSex" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    contract_id, client_id, client_name, employee_name, signtime, intention_gold, deal_gold, 
+    houses_area, houses_price, houses_name, client_sex
+  </sql>
+  <select id="selectByExample" parameterType="indi.group.his.model.ContractExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contract
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="indi.group.his.model.ContractExample">
+    delete from contract
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="indi.group.his.model.Contract">
+    insert into contract (contract_id, client_id, client_name, 
+      employee_name, signtime, intention_gold, 
+      deal_gold, houses_area, houses_price, 
+      houses_name, client_sex)
+    values (#{contractId,jdbcType=INTEGER}, #{clientId,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{employeeName,jdbcType=VARCHAR}, #{signtime,jdbcType=TIMESTAMP}, #{intentionGold,jdbcType=INTEGER}, 
+      #{dealGold,jdbcType=INTEGER}, #{housesArea,jdbcType=REAL}, #{housesPrice,jdbcType=REAL}, 
+      #{housesName,jdbcType=VARCHAR}, #{clientSex,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="indi.group.his.model.Contract">
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        contract_id,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="clientName != null">
+        client_name,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="signtime != null">
+        signtime,
+      </if>
+      <if test="intentionGold != null">
+        intention_gold,
+      </if>
+      <if test="dealGold != null">
+        deal_gold,
+      </if>
+      <if test="housesArea != null">
+        houses_area,
+      </if>
+      <if test="housesPrice != null">
+        houses_price,
+      </if>
+      <if test="housesName != null">
+        houses_name,
+      </if>
+      <if test="clientSex != null">
+        client_sex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null">
+        #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intentionGold != null">
+        #{intentionGold,jdbcType=INTEGER},
+      </if>
+      <if test="dealGold != null">
+        #{dealGold,jdbcType=INTEGER},
+      </if>
+      <if test="housesArea != null">
+        #{housesArea,jdbcType=REAL},
+      </if>
+      <if test="housesPrice != null">
+        #{housesPrice,jdbcType=REAL},
+      </if>
+      <if test="housesName != null">
+        #{housesName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSex != null">
+        #{clientSex,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update contract
+    <set>
+      <if test="record.contractId != null">
+        contract_id = #{record.contractId,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientId != null">
+        client_id = #{record.clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null">
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeName != null">
+        employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signtime != null">
+        signtime = #{record.signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.intentionGold != null">
+        intention_gold = #{record.intentionGold,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealGold != null">
+        deal_gold = #{record.dealGold,jdbcType=INTEGER},
+      </if>
+      <if test="record.housesArea != null">
+        houses_area = #{record.housesArea,jdbcType=REAL},
+      </if>
+      <if test="record.housesPrice != null">
+        houses_price = #{record.housesPrice,jdbcType=REAL},
+      </if>
+      <if test="record.housesName != null">
+        houses_name = #{record.housesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientSex != null">
+        client_sex = #{record.clientSex,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update contract
+    set contract_id = #{record.contractId,jdbcType=INTEGER},
+      client_id = #{record.clientId,jdbcType=VARCHAR},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      signtime = #{record.signtime,jdbcType=TIMESTAMP},
+      intention_gold = #{record.intentionGold,jdbcType=INTEGER},
+      deal_gold = #{record.dealGold,jdbcType=INTEGER},
+      houses_area = #{record.housesArea,jdbcType=REAL},
+      houses_price = #{record.housesPrice,jdbcType=REAL},
+      houses_name = #{record.housesName,jdbcType=VARCHAR},
+      client_sex = #{record.clientSex,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="indi.group.his.model.Contract">
+    update contract
+    <set>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null">
+        signtime = #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intentionGold != null">
+        intention_gold = #{intentionGold,jdbcType=INTEGER},
+      </if>
+      <if test="dealGold != null">
+        deal_gold = #{dealGold,jdbcType=INTEGER},
+      </if>
+      <if test="housesArea != null">
+        houses_area = #{housesArea,jdbcType=REAL},
+      </if>
+      <if test="housesPrice != null">
+        houses_price = #{housesPrice,jdbcType=REAL},
+      </if>
+      <if test="housesName != null">
+        houses_name = #{housesName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientSex != null">
+        client_sex = #{clientSex,jdbcType=BIT},
+      </if>
+    </set>
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="indi.group.his.model.Contract">
+    update contract
+    set client_id = #{clientId,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      employee_name = #{employeeName,jdbcType=VARCHAR},
+      signtime = #{signtime,jdbcType=TIMESTAMP},
+      intention_gold = #{intentionGold,jdbcType=INTEGER},
+      deal_gold = #{dealGold,jdbcType=INTEGER},
+      houses_area = #{housesArea,jdbcType=REAL},
+      houses_price = #{housesPrice,jdbcType=REAL},
+      houses_name = #{housesName,jdbcType=VARCHAR},
+      client_sex = #{clientSex,jdbcType=BIT}
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </update>
+</mapper>

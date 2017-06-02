@@ -1,28 +1,61 @@
 package indi.group.his.model;
 
-public class User {
-    private Integer id;
+import java.io.Serializable;
+import java.util.Date;
 
-    private String username;
+/**
+ * @author 
+ */
+public class User implements Serializable {
+    private Integer userId;
+
+    private String userName;
 
     private String password;
 
-    public Integer getId() {
-        return id;
+    private Date createDatetime;
+
+    private String createIp;
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getUserId() {
+        return userId;
     }
-    public void setId(Integer id) {
-        this.id = id;
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-    public String getUsername() {
-        return username;
+
+    public String getUserName() {
+        return userName;
     }
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
+    }
+
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
+    }
+
+    public String getCreateIp() {
+        return createIp;
+    }
+
+    public void setCreateIp(String createIp) {
+        this.createIp = createIp;
     }
 }
