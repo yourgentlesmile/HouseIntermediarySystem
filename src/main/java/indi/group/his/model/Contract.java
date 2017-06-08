@@ -145,4 +145,27 @@ public class Contract implements Serializable {
     public void setClientSex(Boolean clientSex) {
         this.clientSex = clientSex;
     }
+
+	public Contract(Integer contractId, String clientId, String clientName, String employeeName, Date signtime,
+			Integer intentionGold, Integer dealGold, Float housesArea, Float housesPrice, String housesName,
+			Boolean clientSex) {
+		super();
+		this.contractId = contractId;
+		this.clientId = clientId;
+		this.clientName = clientName;
+		this.employeeName = employeeName;
+		this.signtime = signtime;
+		this.intentionGold = intentionGold;
+		this.dealGold = dealGold;
+		this.housesArea = housesArea;
+		this.housesPrice = housesPrice;
+		this.housesName = housesName;
+		this.clientSex = clientSex;
+	}
+
+	public Contract() {
+		super();
+	}
+	
+    
 }

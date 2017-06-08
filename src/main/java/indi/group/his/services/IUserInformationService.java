@@ -13,4 +13,5 @@ public interface IUserInformationService {
      * @return
      */
     UserInformation[] getUserInformation(UserInformation userInformation,int findby);
+    int getUserId(String username);
 }

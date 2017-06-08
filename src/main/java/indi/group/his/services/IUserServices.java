@@ -37,5 +37,7 @@ public interface IUserServices {
      * @return 返回查询到的用户信息
      */
     User getUser(int userid);
+    
+    int getUserId(String username);
 
 }

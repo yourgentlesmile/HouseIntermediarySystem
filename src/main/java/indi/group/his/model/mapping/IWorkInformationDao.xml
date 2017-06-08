@@ -12,7 +12,7 @@
   </resultMap>
   <resultMap type="indi.group.his.model.WorkInfoUnionUser" id="WorkInfoUnionUserQuery">
     <result column="user_id" jdbcType="INTEGER" property="userId"/>
-    <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    <result column="real_name" jdbcType="VARCHAR" property="userName"/>
     <result column="performance_now" jdbcType="VARCHAR" property="performanceNow"/>
     <result column="performance_total" jdbcType="VARCHAR" property="performanceTotal"/>
     <result column="area" jdbcType="VARCHAR" property="area"/>
@@ -208,8 +208,8 @@
     </if>
   </update>
   <select id="getAllUserAchivement" resultMap="WorkInfoUnionUserQuery" parameterType="int">
-      select a.user_id,a.user_name,b.performance_now,b.performance_total,b.area,b.user_telephone from
-      user as a,work_information as b where a.user_id = b.user_id ORDER BY performance_now 
+      select a.user_id,a.real_name,b.performance_now,b.performance_total,b.area,b.user_telephone from
+      user_information as a,work_information as b where a.user_id = b.user_id ORDER BY performance_now 
     <if test="_parameter == 1">
         ASC
     </if>

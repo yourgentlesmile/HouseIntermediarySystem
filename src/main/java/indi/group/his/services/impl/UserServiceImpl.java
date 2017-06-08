@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import indi.group.his.dao.IUserDao;
 import indi.group.his.model.User;
 import indi.group.his.model.UserExample;
-import indi.group.his.model.UserInformation;
+import indi.group.his.services.IAdminService;
 import indi.group.his.services.IUserServices;
 
 @Service
@@ -16,12 +16,18 @@ public class UserServiceImpl implements IUserServices {
 
     @Autowired
     private IUserDao userdaoDB;
+    @Autowired
+    private IAdminService adminService;
     public UserServiceImpl() {
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public int UserLogin(String account, String password) {
+        int adminresult = adminService.UserLogin(account, password);
+        if(adminresult == 100){
+            return adminresult;
+        }
         UserExample userExample = new UserExample();
         UserExample.Criteria cri = userExample.createCriteria();
         cri.andUserNameEqualTo(account);
@@ -65,5 +71,13 @@ public class UserServiceImpl implements IUserServices {
     @Override
     public User getUser(int userid) {
         return userdaoDB.selectByPrimaryKey(userid);
+    }
+    
+    @Override
+    public int getUserId(String username){
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUserNameEqualTo(username);
+        return ((User)userdaoDB.selectByExample(example).toArray()[0]).getUserId();
     }
 }

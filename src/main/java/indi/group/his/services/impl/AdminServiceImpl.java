@@ -46,6 +46,20 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
+    public int UserLogin(String account, String password) {
+        AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria cri = adminExample.createCriteria();
+        cri.andAdminNameEqualTo(account);
+        List<Admin> result = adminDB.selectByExample(adminExample);
+        if(result.size() == 0) return -100;
+        else{
+            Admin user = result.get(0);
+            if(user.getPassword().equals(password)) return 100;
+            else return 0;
+        }
+    }
+    
+    @Override
     public int modifyAdmin(Admin admin) {
         return adminDB.updateByPrimaryKeySelective(admin);
     }

@@ -34,7 +34,7 @@ public class WorkInformationServiceImpl implements IWorkInformationService {
         WorkInformationExample wif = new WorkInformationExample();
         WorkInformationExample.Criteria cri = wif.createCriteria();
         cri.andUserIdEqualTo(value.getUserId());
-        int index = iWorkInformationDao.updateByExample(value, wif);
+        int index = iWorkInformationDao.updateByExampleSelective(value, wif);
         logger.debug("modifyWorkInformation : [after] index = " + index);
         return index >= 0;
     }

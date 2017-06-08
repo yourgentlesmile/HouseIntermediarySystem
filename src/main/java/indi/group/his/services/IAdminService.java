@@ -13,4 +13,5 @@ public interface IAdminService {
      */
     Admin[] getAdmin(Admin admin,int findby);
     int modifyAdmin(Admin admin);
+    int UserLogin(String account, String password);
 }

@@ -25,7 +25,7 @@ public interface IClientInformationService {
      * 查询客户信息
      * @param username 按用户姓名查询
      * @param clientId 按客户id查询
-     * @param queryBy 为0：按用户姓名查询；为1：按客户id查询
+     * @param queryBy 为0：按用户姓名查询；为1：按客户id查询 2:获取所有值
      * @return 返回查询结果集，单个值则为数据0号元素
      */
     ClientInformation[] getClientInformation(String username,int clientId,int queryBy);

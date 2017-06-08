@@ -127,6 +127,12 @@
             success: function(data,textStatus) {
                 console.log(data);
                 console.log(textStatus);
+                if(data==1){
+                	window.location.href="main";
+                }
+                else{
+                	window.location.href="Index";
+                };
             }
         });
     }
@@ -228,7 +234,7 @@
                                     </div>
                                     <div class="input-group linewidthholder">
                                         <span class="input-group-addon password-holder">密码</span>
-                                        <input type="text" class="form-control" placeholder="password" name="password" id="password"/>
+                                        <input type="password" class="form-control" placeholder="password" name="password" id="password"/>
                                     </div>
                                     <div class="input-group linewidthholder">
                                         <span class="input-group-addon">验证码</span>

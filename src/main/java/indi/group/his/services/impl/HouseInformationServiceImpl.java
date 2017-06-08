@@ -9,14 +9,17 @@ import org.springframework.stereotype.Service;
 import indi.group.his.dao.IHouseInformationDao;
 import indi.group.his.model.HouseInformation;
 import indi.group.his.model.HouseInformationExample;
+import indi.group.his.model.WorkInformationExample;
 import indi.group.his.services.IHouseInformationService;
 @Service
 public class HouseInformationServiceImpl implements IHouseInformationService {
 
-    public static final int QUERY_BY_HOUSENAME = 0;
-    public static final int QUERY_BY_PRICE = 1;
-    public static final int QUERY_BY_AREA = 2;
-    public static final int FETCH_ALL = 3;
+    public static final int QUERY_BY_HOUSENAME = 1;
+    public static final int QUERY_BY_PRICE = 2;
+    public static final int QUERY_BY_AREA = 3;
+    public static final int FETCH_ALL = 4;
+    public static final int DELETE_BY_ID = 1;
+    public static final int DELETE_BY_HOUSENAME = 2;
     
     @Autowired
     private IHouseInformationDao houseDB;
@@ -36,8 +39,21 @@ public class HouseInformationServiceImpl implements IHouseInformationService {
     }
 
     @Override
-    public int deleteHouseInformation(HouseInformation houseInformation) {
-        return houseDB.deleteByPrimaryKey(houseInformation.getHousesId());
+    /**
+     * 
+     * @param houseInformation
+     * @param findtype   1:按ID删除 2：按房名删除
+     * @return
+     */
+    public int deleteHouseInformation(HouseInformation houseInformation,int findtype) {
+    	HouseInformationExample houseInformationExample = new HouseInformationExample();
+    	HouseInformationExample.Criteria cri = houseInformationExample.createCriteria();
+    	if(findtype == DELETE_BY_ID){
+        	return houseDB.deleteByPrimaryKey(houseInformation.getHousesId());
+        }else{
+        	cri.andHousesNameEqualTo(houseInformation.getHousesName());
+        }
+    	return houseDB.deleteByExample(houseInformationExample);
     }
 
     @Override
@@ -51,7 +67,7 @@ public class HouseInformationServiceImpl implements IHouseInformationService {
         if(findby == QUERY_BY_AREA){
             cri.andHousesAreaBetween(Float.parseFloat(queryValue.get("area_min")), Float.parseFloat(queryValue.get("area_max")));
         }else if (findby == QUERY_BY_HOUSENAME) {
-            cri.andHousesNameEqualTo(housename);
+            cri.andHousesNameEqualTo(housename == null ? "null" : housename);
         }else if (findby == QUERY_BY_PRICE){
             cri.andHousesPriceBetween(Float.parseFloat(queryValue.get("price_min")), Float.parseFloat(queryValue.get("price_max")));
         }else {
