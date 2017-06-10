@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import indi.group.his.dao.IAdminDao;
 import indi.group.his.dao.IUserDao;
 import indi.group.his.model.User;
 import indi.group.his.model.UserExample;
@@ -16,6 +17,7 @@ public class UserServiceImpl implements IUserServices {
 
     @Autowired
     private IUserDao userdaoDB;
+    
     @Autowired
     private IAdminService adminService;
     public UserServiceImpl() {

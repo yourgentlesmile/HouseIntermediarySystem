@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import indi.group.his.model.UserInformation;
+import indi.group.his.services.IAdminService;
 import indi.group.his.services.IUserInformationService;
 import indi.group.his.services.IUserServices;
 
@@ -35,6 +36,8 @@ public class LoginController {
     private IUserServices userServices = null;
     @Autowired
     private IUserInformationService userInformationService= null;
+    @Autowired
+    private IAdminService adminService;
     public static String safecode="";
     /**
      * Describle:
@@ -73,17 +76,26 @@ public class LoginController {
         int result = userServices.UserLogin((String)jobject.get("username"), (String)jobject.get("password"));
         String username = (String)jobject.get("username");
         if(result == 1||result == 100){
-            int userid = userServices.getUserId(username);
-            Cookie ck = new Cookie("token", username + "/" + (result == 1?result:0));
-            ck.setMaxAge(86400);
-            logger.debug(ck.toString());
-            logger.debug("token"+ username + "/" + userid);
-            response.addCookie(ck);
+            int userid;
+            if(result == 1){
+                userid = userServices.getUserId(username);
+            }else
+            {
+                userid = 1;
+            }
             UserInformation userInformation = new UserInformation();
             userInformation.setUserId(userid);
             String realname = userInformationService.getUserInformation(userInformation, 0)[0].getRealName();
+            Cookie ck = new Cookie("token", username + "/" + realname + "/" + (result == 1?result:0));
+            ck.setMaxAge(86400);
+            logger.debug(ck.toString());
+            logger.debug("token"+ username + "/" + userid);
+            ck.setPath("/");
+            response.addCookie(ck);
+            userInformation.setUserId(userid);
             logger.debug("[realname]: " + realname);
             request.getSession().setAttribute("username",realname);
+            request.getSession().setAttribute("isadmin", result + "");
         }
         return result+"";   //1:登录成功 0：登录失败 -1：用户名不存在
     }

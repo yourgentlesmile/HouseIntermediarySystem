@@ -33,19 +33,52 @@ function refreshHouseList(data){
     selector.html("");
     for(var i=0;i<data.length;i++){
     	var id = "<th>"+(i+1)+"</th>";
-        var name = "<th>"+"<a>"+data[i].housesName+"</a>"+"</th>";
+        var name = "<th>"+"<a"+" id=a_"+(i+1)+" data-id=\""+i+"\" data-name=\""+data[i].housesName+"\">"+data[i].housesName+"</a>"+"</th>";
         var area = "<th>"+data[i].housesArea+"</th>";
         var price = "<th>"+data[i].housesPrice+"</th>";
         var clientTel = "<th>"+data[i].clientTelephone+"</th>";
         var time ="<th>"+data[i].housesOpentime+"</th>";
         var employee = "<th>"+data[i].employeeList+"</th>";
         selector.append("<tr>"+id+name+area+price+clientTel+time+employee);
+        
+        var a_num = $("#a_"+(i+1));
+        $(a_num).click(function(){
+            var p=["125.270907,43.891132","115.931434,28.666026","115.931434,28.666026","115.977799,28.712226"];
+        	var i=$(this).attr("data-id");
+        	var destname=$(this).attr("data-name");
+        	var str="http://m.amap.com/navi/?dest="+p[i]+"&destName="+destname+"&hideRouteIcon=1&key=cb95629eb44f385aad3a787a8f410736";
+            document.getElementById("map").src=str;
+        	$("#open_map").dialog({
+        		width:700,
+        		height:500,
+        		modal:true
+        	});
+        });     
     }
 };
+
+function CreateHouse(){
+	var houses=new Object();
+	houses.housesName = $("#newHousesname").val();
+	houses.housesArea = parseFloat($("#newHousesarea").val());
+	console.log(houses.housesArea);
+	houses.housesPrice= parseFloat($("#newHousesprice").val());
+	houses.clientTelephone=$("#newClientTelephone").val();
+	houses.housesOpentime=$("#newHousesOpentime").val();
+	houses.employeeList=$("#newEmployeename").val();
+	houses.housesId=null;
+	houses.dealHistory=null;
+	
+	request(houses,"POST","addHouseInfo",function(){
+		request(null,"GET","getHouseInfo",refreshHouseList);
+	});
+}
 
 function refreshContractList(data){
 	var selector = $("#contractlist").find("#list1").find("#listbody");
     selector.html("");
+    
+	var isAdmin = $.cookie("token").split("/")[2];
     for(var i=0;i<data.length;i++){
     	
     	var id = "<th>"+(i+1)+"</th>";
@@ -65,10 +98,13 @@ function refreshContractList(data){
         var employee = "<th>"+data[i].employeeName+"</th>";
         var detail = "<th>"+"<button id="+"data_"+(i+1)+" data-id=\""+data[i].contractId+"\">详情"+"</button>";
         var delet = "<th>"+"<button id="+"delete_"+(i+1)+" data-id=\""+data[i].contractId+"\" data-name=\""+data[i].employeeName+"\">通过"+"</button>";
-        /*if(data[i].employeeName=="阿梅利亚"){
+       
+        if(isAdmin == 1 && data[i].employeeName==$.cookie("token").split("/")[1]){
         	selector.append("<tr>"+id+name+clientname+time+employee+detail+delet);
-        }*/
-        selector.append("<tr>"+id+name+clientname+time+employee+detail+delet);
+        }
+        if(isAdmin==0){
+        	selector.append("<tr>"+id+name+clientname+time+employee+detail+delet);
+        }
         var data_num="#data_"+(i+1);
         var delete_num="#delete_"+(i+1);
         $(data_num).click(function(){
@@ -90,6 +126,9 @@ function refreshContractList(data){
         		request(null,"GET","Contract/none/list/4/1",refreshContractList);
         	});
         });
+        if(isAdmin!=0){
+    		$(delete_num).css("display","none");
+    	};
     }
 };
 
@@ -99,6 +138,7 @@ function refreshDetailList(data){
 	 for(var i=0;i<data.length;i++){
 	        var name = "<th>"+"<a>"+data[i].housesName+"</a>"+"</th>";
 	        var clientname = "<th>"+data[i].clientName+"</th>";
+	        
 	        
         	var oldTime=(new Date(data[i].signtime).getTime());
         	var newTime=new Date(oldTime);
@@ -132,7 +172,7 @@ function CreateContract(){
 	var now =new Date().getTime();
 	contract.signtime=now;
 	contract.employeeName=$("#newEmployeename").val();
-	contract.clientId="1";
+	contract.clientId=$("#newClientid").val();
 	contract.contractId=null;
 	contract.clientSex=null;
 	
@@ -154,36 +194,10 @@ function CreateContract(){
 	
 };
 
-function DeleteContract(a){
-	var contract = new Object();
-	contract.contractId=a;
-	contract.housesName = null;
-	contract.housesArea = null;
-	contract.housesPrice= null;
-	contract.intentionGold=null;
-	contract.dealGold=null;
-	contract.clientName=null;
-	contract.signtime=null;
-	contract.employeeName=null;
-	contract.clientId=null;
-	contract.clientSex=null;
-	//request(contract, "POST", "Contract/none/delete", isDelete);
-	
-	
-};
-
-function isDelete(a){
-	if(a==1){
-		request(null,"GET","Contract/none/list/4/1",refreshContractList);
-	}
-	else{
-		alert("删除失败");
-	}
-}
-
 function refreshBlackList(data){
 	var selector = $("#blacklist").find("#list1").find("#listbody");
 	selector.html("");
+	var isAdmin = $.cookie("token").split("/")[2];
     for(var i=0;i<data.length;i++){
     	
     	var id = "<th>"+(i+1)+"</th>";
@@ -208,6 +222,10 @@ function refreshBlackList(data){
         	var id = $(this).attr("data-id");
         	DeleteBlackList(id);
         });
+        if(isAdmin!=0){
+    		$(delete_num).css("display","none");
+    	};
+        
     }
 };
 

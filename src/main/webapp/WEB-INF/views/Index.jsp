@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>登录</title>
         <script type="text/javascript" src="resource/js/jquery-3.2.0.js" ></script>
         <script type="text/javascript" src="resource/js/bootstrap.js" ></script>
         <script type="text/javascript" src="resource/js/jquery.cookie.js" ></script>
@@ -127,8 +127,8 @@
             success: function(data,textStatus) {
                 console.log(data);
                 console.log(textStatus);
-                if(data==1){
-                	window.location.href="main";
+                if(data==1 || data == 100){
+                	window.location.href="Mainpage";
                 }
                 else{
                 	window.location.href="Index";

@@ -110,6 +110,13 @@ public class TestController {
     	return houseInfoService.deleteHouseInformation(houseInformation, type) + "";
     }
     
+    @ResponseBody
+    @PostMapping("/addHouseInfo")
+    public String addHouseInfo(@RequestBody HouseInformation houseInformation){
+    	
+    	return houseInfoService.addHouseInformation(houseInformation) + "";
+    }
+    
     @PostMapping("/updateContract")
     @ResponseBody
     public String updateContract(@RequestBody String data){

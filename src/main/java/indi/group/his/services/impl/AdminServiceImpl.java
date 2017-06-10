@@ -46,6 +46,11 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
+    public int modifyAdmin(Admin admin) {
+        return adminDB.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
     public int UserLogin(String account, String password) {
         AdminExample adminExample = new AdminExample();
         AdminExample.Criteria cri = adminExample.createCriteria();
@@ -58,10 +63,4 @@ public class AdminServiceImpl implements IAdminService {
             else return 0;
         }
     }
-    
-    @Override
-    public int modifyAdmin(Admin admin) {
-        return adminDB.updateByPrimaryKeySelective(admin);
-    }
-
 }

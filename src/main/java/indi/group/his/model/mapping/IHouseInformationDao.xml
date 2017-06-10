@@ -5,7 +5,7 @@
     <id column="houses_id" jdbcType="INTEGER" property="housesId" />
     <result column="client_telephone" jdbcType="VARCHAR" property="clientTelephone" />
     <result column="houses_opentime" jdbcType="VARCHAR" property="housesOpentime" />
-    <result column="deal _History" jdbcType="VARCHAR" property="dealHistory" />
+    <result column="deal_History" jdbcType="VARCHAR" property="dealHistory" />
     <result column="employee_list" jdbcType="VARCHAR" property="employeeList" />
     <result column="houses_area" jdbcType="REAL" property="housesArea" />
     <result column="houses_price" jdbcType="REAL" property="housesPrice" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    houses_id, client_telephone, houses_opentime, "deal _History", employee_list, houses_area, 
+    houses_id, client_telephone, houses_opentime, deal_History, employee_list, houses_area, 
     houses_price, houses_name
   </sql>
   <select id="selectByExample" parameterType="indi.group.his.model.HouseInformationExample" resultMap="BaseResultMap">
@@ -113,7 +113,7 @@
   </delete>
   <insert id="insert" parameterType="indi.group.his.model.HouseInformation">
     insert into house_information (houses_id, client_telephone, houses_opentime, 
-      "deal _History", employee_list, houses_area, 
+      deal_History, employee_list, houses_area, 
       houses_price, houses_name)
     values (#{housesId,jdbcType=INTEGER}, #{clientTelephone,jdbcType=VARCHAR}, #{housesOpentime,jdbcType=VARCHAR}, 
       #{dealHistory,jdbcType=VARCHAR}, #{employeeList,jdbcType=VARCHAR}, #{housesArea,jdbcType=REAL}, 
@@ -132,7 +132,7 @@
         houses_opentime,
       </if>
       <if test="dealHistory != null">
-        "deal _History",
+        deal_History,
       </if>
       <if test="employeeList != null">
         employee_list,
@@ -187,7 +187,7 @@
         houses_opentime = #{record.housesOpentime,jdbcType=VARCHAR},
       </if>
       <if test="record.dealHistory != null">
-        "deal _History" = #{record.dealHistory,jdbcType=VARCHAR},
+        deal_History = #{record.dealHistory,jdbcType=VARCHAR},
       </if>
       <if test="record.employeeList != null">
         employee_list = #{record.employeeList,jdbcType=VARCHAR},
@@ -211,7 +211,7 @@
     set houses_id = #{record.housesId,jdbcType=INTEGER},
       client_telephone = #{record.clientTelephone,jdbcType=VARCHAR},
       houses_opentime = #{record.housesOpentime,jdbcType=VARCHAR},
-      "deal _History" = #{record.dealHistory,jdbcType=VARCHAR},
+      deal_History = #{record.dealHistory,jdbcType=VARCHAR},
       employee_list = #{record.employeeList,jdbcType=VARCHAR},
       houses_area = #{record.housesArea,jdbcType=REAL},
       houses_price = #{record.housesPrice,jdbcType=REAL},
@@ -230,7 +230,7 @@
         houses_opentime = #{housesOpentime,jdbcType=VARCHAR},
       </if>
       <if test="dealHistory != null">
-        "deal _History" = #{dealHistory,jdbcType=VARCHAR},
+        deal_History = #{dealHistory,jdbcType=VARCHAR},
       </if>
       <if test="employeeList != null">
         employee_list = #{employeeList,jdbcType=VARCHAR},
@@ -251,7 +251,7 @@
     update house_information
     set client_telephone = #{clientTelephone,jdbcType=VARCHAR},
       houses_opentime = #{housesOpentime,jdbcType=VARCHAR},
-      "deal _History" = #{dealHistory,jdbcType=VARCHAR},
+      deal_History = #{dealHistory,jdbcType=VARCHAR},
       employee_list = #{employeeList,jdbcType=VARCHAR},
       houses_area = #{housesArea,jdbcType=REAL},
       houses_price = #{housesPrice,jdbcType=REAL},

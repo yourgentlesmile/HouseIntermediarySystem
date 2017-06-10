@@ -11,6 +11,7 @@
         <script type="text/javascript" src="resource/js/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="resource/js/bootstrap.js"></script>
         <script type="text/javascript" src="resource/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="resource/js/jquery.cookie.js"></script>
         <script type="text/javascript" src="resource/js/main.js"></script>
 		<title>黑名单</title>
 </head>
@@ -18,10 +19,10 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/HouseIntermediarySystem/Achivement">蔡氏集团</a>
+                    <a class="navbar-brand" href="/HouseIntermediarySystem/Mainpage">蔡氏集团</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <div class="navbar-right" id="welcome" style="line-height: 50px;color: white;"><span style="color:white;"><%session.getAttribute("username"); %>,你好</span>&nbsp;</div>
+                    <div class="navbar-right" id="welcome" style="line-height: 50px;color: white;"><span style="color:white;">${username},你好</span>&nbsp;</div>
                     
                 </div>
             </div>
@@ -31,15 +32,15 @@
                 <div class="col-sm-3 col-md-2 sidenav">
                     <ul class="nav nav-sidenav">
                         <li class="active"><a href="/HouseIntermediarySystem/Achivement">业绩排名</a></li>
-                        <li><a href="/HouseIntermediarySystem/notice">查看公告</a></li>
+                        <li><a href="/HouseIntermediarySystem/Achivement/notice">查看公告</a></li>
                         <li><a href="/HouseIntermediarySystem/Contract">合同信息</a></li>
-                        <li><a href="/HouseIntermediarySystem/housesource">房源信息</a></li>
-                        <li><a href="/HouseIntermediarySystem/Achivement/blacklist">黑名单</a></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a href="/HouseIntermediarySystem/Achivement/housesource">房源信息</a></li>
+                        <li><a href="/HouseIntermediarySystem/BlackList">黑名单</a></li>
+                        <li><a id="quit" href="/HouseIntermediarySystem/Index">退出</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-offset-2"><span style="float:left;font-size:14px;padding-top:20px;">当前位置：<a href="">首页</a>><a href="#">黑名单</a></span></div>
+            <div class="col-sm-offset-2"><span style="float:left;font-size:14px;padding-top:20px;">当前位置：<a href="/HouseIntermediarySystem/Mainpage">首页</a>><a href="/HouseIntermediarySystem/BlackList">黑名单</a></span></div>
 			 <div id="searchBlackList" class="input-group" >
             	
             	<input id="searchBody" type="text" class="form-control" placeholder="请输入客户名" style="width: 180px;"/>
@@ -83,7 +84,6 @@
 	}); 
  $("#NameSearch").click(function(){
 	 var clientname=$("#searchBlackList").find("#searchBody").val();
-	 alert(clientname);
 	 request(null,"GET","BlackList/query/1/"+clientname,refreshBlackList);
  });
  $("#openDialog").click(function(){
@@ -104,5 +104,8 @@
 		 }
 	 });
  });
+ $("#quit").click(function(){
+		$.cookies("token",null,{path:"/"});
+	});
 </script>
 </html>

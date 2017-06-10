@@ -11,17 +11,27 @@
         <script type="text/javascript" src="resource/js/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="resource/js/bootstrap.js"></script>
         <script type="text/javascript" src="resource/js/jquery-ui.js"></script>
-		
-		<title>合同信息</title>
+        <script type="text/javascript" src="resource/js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="resource/js/main.js"></script>
+        
+        <title>合同信息</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/HouseIntermediarySystem/Achivement">蔡氏集团</a>
+                    <a class="navbar-brand" href="/HouseIntermediarySystem/Mainpage">蔡氏集团</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <div class="navbar-right" id="welcome" style="line-height: 50px;color: white;"><span style="color:white;"><%session.getAttribute("username"); %>,你好</span>&nbsp;</div>
+                    <div class="navbar-right" id="welcome" style="line-height: 50px;color: white;"><span style="color:white;">
+                    <%
+                    String result = null;
+                    if(((String)session.getAttribute("isadmin")).equals("100")){
+                        result = "管理员";
+                    }
+                    else{
+                        result = (String)session.getAttribute("username");
+                    }%><%=result%> ,你好</span>&nbsp;</div>
                 </div>
             </div>
         </nav>
@@ -31,15 +41,10 @@
                     <ul class="nav nav-sidenav">
                         <li class="active"><a href="/HouseIntermediarySystem/Achivement">业绩排名</a></li>
                         <li><a href="/HouseIntermediarySystem/Achivement/notice">查看公告</a></li>
-                        <li class="dropdown"><a href="/HouseIntermediarySystem/Contract" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="flase">合同信息<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">已完成合同</a></li>
-                                <li><a href="#">待审核合同</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="/HouseIntermediarySystem/Contract">合同信息</a></li>
                         <li><a href="/HouseIntermediarySystem/Achivement/housesource">房源信息</a></li>
-                        <li><a href="/HouseIntermediarySystem/Blacklist">黑名单</a></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a href="/HouseIntermediarySystem/BlackList">黑名单</a></li>
+                        <li><a id="quit" href="/HouseIntermediarySystem/Index">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -66,29 +71,29 @@
             </div>
             <button id="openDialog" class="btn" style="border:1px solid">新增合同</button>
             <div id="dialog-form" title="创建新合同" style="display:none;">
-            	<form>
-            		<fieldset>
-            			<label for="newHousesname">楼盘名</label>
-            			<input id="newHousesname" type="text"  class="form-control" style="width:300px">
-    					<label for="newHousesarea">房屋面积</label>
-    					<input id="newHousesarea" type="text"  class="form-control" style="width:300px">
-    					<label for="newHousesprice">房屋价格/平方米</label>
-    					<input id="newHousesprice" type="text"  class="form-control" style="width:300px">
-    					<label for="newIntentiongold">订金</label>
-    					<input id="newIntentiongold" type="text"  class="form-control" style="width:300px">
-    					<label for="newDealgold">成交金额</label>
-    					<input id="newDealgold" type="text"  class="form-control" style="width:300px">
-    					<label for="newClientname">客户姓名</label>
-    					<input id="newClientname" type="text"  class="form-control" style="width:300px">
-    					<!-- <label for="newSigntime">签约时间</label>
-    					<input id="newSigntime" type="text" class="form-control" style="width:300px"> -->
-    					<label for="newEmployeename">负责人</label>
-    					<input id="newEmployeename" type="text"  class="form-control" style="width:300px">
-            		</fieldset>
-            	</form>
+                <form>
+                    <fieldset>
+                        <label for="newHousesname">楼盘名</label>
+                        <input id="newHousesname" type="text"  class="form-control" style="width:300px">
+                        <label for="newHousesarea">房屋面积</label>
+                        <input id="newHousesarea" type="text"  class="form-control" style="width:300px">
+                        <label for="newHousesprice">房屋价格/平方米</label>
+                        <input id="newHousesprice" type="text"  class="form-control" style="width:300px">
+                        <label for="newIntentiongold">订金</label>
+                        <input id="newIntentiongold" type="text"  class="form-control" style="width:300px">
+                        <label for="newDealgold">成交金额</label>
+                        <input id="newDealgold" type="text"  class="form-control" style="width:300px">
+                        <label for="newClientname">客户姓名</label>
+                        <input id="newClientname" type="text"  class="form-control" style="width:300px">
+                        <label for="newClientid">客户身份证</label>
+                        <input id="newClientid" type="text"  class="form-control" style="width:300px">
+                        <label for="newEmployeename">负责人</label>
+                        <input id="newEmployeename" type="text"  class="form-control" style="width:300px">
+                    </fieldset>
+                </form>
             </div>
             <div id="dialog" title="合同详细" style="display:none;">
-            	<div class="table-responsive">
+                <div class="table-responsive">
                         <table id="detaillist" class="table table-bordered">
                             <thead>
                                 <tr>
@@ -104,7 +109,7 @@
                                 </tr>
                                 </thead>
                             <tbody id="detailbody">
-                            		
+                                    
                             </tbody>
                         </table>
             
@@ -115,31 +120,32 @@
 
  
 <script>
-	$().ready(function() {
-	request(null,"GET","Contract/none/list/4/1",refreshContractList);
-	});
-	$("#openDialog").click(function (){
-		$("#dialog-form").dialog({
-			width:"350",
-			height:"450",
-			modal:true,
-			draggable:false,
-			buttons:{
-				"创建合同":function(){
-					CreateContract();
-					$("#dialog-form").dialog("close");
-					request(null,"GET","Contract/none/list/4/1",refreshContractList);
-					
-				},
-				"取消":function(){
-					$("#dialog-form").dialog("close");
-				}
-			},
+    $().ready(function() {
+    request(null,"GET","Contract/none/list/4/1",refreshContractList);
+    });
+    $("#openDialog").click(function (){
+        $("#dialog-form").dialog({
+            width:"350",
+            height:"450",
+            modal:true,
+            draggable:false,
+            buttons:{
+                "创建合同":function(){
+                    CreateContract();
+                    $("#dialog-form").dialog("close");
+                    request(null,"GET","Contract/none/list/4/1",refreshContractList);
+                },
+                "取消":function(){
+                    $("#dialog-form").dialog("close");
+                }
+            },
 
-		});
-	}); 
-
-	
+        });
+    }); 
+    $("#quit").click(function(){
+        $.cookies("token",null,{path:"/"});
+    });
+    
   
 </script>
 </html>

@@ -31,7 +31,7 @@ public class CheckLoginController {
             }else{
                 Cookie ck = new Cookie("Histoken", null);
                 ck.setMaxAge(0);
-                response.addCookie(ck);
+                //response.addCookie(ck);
                 return "redirect:Index";
             }
         }
