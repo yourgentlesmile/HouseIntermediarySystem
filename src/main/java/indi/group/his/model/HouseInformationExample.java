@@ -325,72 +325,72 @@ public class HouseInformationExample {
         }
 
         public Criteria andDealHistoryIsNull() {
-            addCriterion("deal_History is null");
+            addCriterion("\"deal _History\" is null");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryIsNotNull() {
-            addCriterion("deal_History is not null");
+            addCriterion("\"deal _History\" is not null");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryEqualTo(String value) {
-            addCriterion("deal_History =", value, "dealHistory");
+            addCriterion("\"deal _History\" =", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryNotEqualTo(String value) {
-            addCriterion("deal_History <>", value, "dealHistory");
+            addCriterion("\"deal _History\" <>", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryGreaterThan(String value) {
-            addCriterion("deal_History >", value, "dealHistory");
+            addCriterion("\"deal _History\" >", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryGreaterThanOrEqualTo(String value) {
-            addCriterion("deal_History >=", value, "dealHistory");
+            addCriterion("\"deal _History\" >=", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryLessThan(String value) {
-            addCriterion("deal_History <", value, "dealHistory");
+            addCriterion("\"deal _History\" <", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryLessThanOrEqualTo(String value) {
-            addCriterion("deal_History <=", value, "dealHistory");
+            addCriterion("\"deal _History\" <=", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryLike(String value) {
-            addCriterion("deal_History like", value, "dealHistory");
+            addCriterion("\"deal _History\" like", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryNotLike(String value) {
-            addCriterion("deal_History not like", value, "dealHistory");
+            addCriterion("\"deal _History\" not like", value, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryIn(List<String> values) {
-            addCriterion("deal_History in", values, "dealHistory");
+            addCriterion("\"deal _History\" in", values, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryNotIn(List<String> values) {
-            addCriterion("deal_History not in", values, "dealHistory");
+            addCriterion("\"deal _History\" not in", values, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryBetween(String value1, String value2) {
-            addCriterion("deal_History between", value1, value2, "dealHistory");
+            addCriterion("\"deal _History\" between", value1, value2, "dealHistory");
             return (Criteria) this;
         }
 
         public Criteria andDealHistoryNotBetween(String value1, String value2) {
-            addCriterion("deal_History not between", value1, value2, "dealHistory");
+            addCriterion("\"deal _History\" not between", value1, value2, "dealHistory");
             return (Criteria) this;
         }
 

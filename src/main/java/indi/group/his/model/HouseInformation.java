@@ -9,7 +9,7 @@ public class HouseInformation implements Serializable {
     private Integer housesId;
 
     /**
-     * 客户手机号码
+     * 业主手机号码
      */
     private String clientTelephone;
 

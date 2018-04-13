@@ -145,6 +145,7 @@ public class Contract implements Serializable {
     public void setClientSex(Boolean clientSex) {
         this.clientSex = clientSex;
     }
+<<<<<<< HEAD
 
 	public Contract(Integer contractId, String clientId, String clientName, String employeeName, Date signtime,
 			Integer intentionGold, Integer dealGold, Float housesArea, Float housesPrice, String housesName,
@@ -168,4 +169,6 @@ public class Contract implements Serializable {
 	}
 	
     
+=======
+>>>>>>> 2b587001b4a17860b23bac25a28d2181ad387744
 }
