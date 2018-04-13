@@ -4,13 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import javax.annotation.Resource;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import indi.group.his.model.User;
 //import indi.group.his.services.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

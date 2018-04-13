@@ -48,6 +48,7 @@
             </div>
                 <span id="freeSpace"><strong>${usedspace}</strong> /${totalspace}</span>
             </div>
+        </div>
         <div class="container showposition">
             <div class="col-center">
                 <div class="row imgdi col-center">

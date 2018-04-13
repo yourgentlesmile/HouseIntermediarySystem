@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>登录</title>
+        <title>JSP Page</title>
         <script type="text/javascript" src="resource/js/jquery-3.2.0.js" ></script>
         <script type="text/javascript" src="resource/js/bootstrap.js" ></script>
         <script type="text/javascript" src="resource/js/jquery.cookie.js" ></script>
@@ -127,12 +127,6 @@
             success: function(data,textStatus) {
                 console.log(data);
                 console.log(textStatus);
-                if(data==1 || data == 100){
-                	window.location.href="Mainpage";
-                }
-                else{
-                	window.location.href="Index";
-                };
             }
         });
     }
@@ -234,7 +228,7 @@
                                     </div>
                                     <div class="input-group linewidthholder">
                                         <span class="input-group-addon password-holder">密码</span>
-                                        <input type="password" class="form-control" placeholder="password" name="password" id="password"/>
+                                        <input type="text" class="form-control" placeholder="password" name="password" id="password"/>
                                     </div>
                                     <div class="input-group linewidthholder">
                                         <span class="input-group-addon">验证码</span>
